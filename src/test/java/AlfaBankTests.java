@@ -7,8 +7,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class AlfaBankTests {
 
     @Test
-
-    void assertThatFiveDepositArchivePresentOnPage(){
+    void assertThatFiveDepositArchivePresentOnPage() {
         open("http://alfabank.ru");
         $("body").shouldHave(text("Частным лицам"));
         $(byText("Вклады")).shouldBe(visible).click();
