@@ -17,5 +17,41 @@ public class AlfaBankTests {
         $$(byText("Депозиты")).find(visible).parent().click();
         $("#filter").$$("[data-widget-name=CatalogCard]").shouldHaveSize(5);
     }
+
+    @Test
+    void insuranceTabVerificationUsingSibling() {
+        open("http://alfabank.ru");
+        $("#alfa").preceding(0);
+        $$(byText("Вклады")).find(visible).click();
+        $("[data-test-id='tabs-list-tabTitle-0']").sibling(0).click();
+        $("[data-test-id='accordion-header-2']").shouldHave(text("Страхованию подлежат"));
+    }
+
+    @Test
+    void insuranceTabVerificationUsingCloset() {
+        open("http://alfabank.ru");
+        $("#alfa").preceding(0);
+        $$(byText("Вклады")).find(visible).click();
+        $("[data-test-id='tabs-list-tabTitle-1'] span").closest("button").click();
+        $("[data-test-id='accordion-header-2']").shouldHave(text("Страхованию подлежат"));
+    }
+
+    @Test
+    void insuranceTabVerificationUsingPreceding() {
+        open("http://alfabank.ru");
+        $("#alfa").preceding(0);
+        $$(byText("Вклады")).find(visible).click();
+        $("[data-test-id='tabs-list-tabTitle-2']").preceding(0).click();
+        $("[data-test-id='accordion-header-2']").shouldHave(text("Страхованию подлежат"));
+    }
+
+    @Test
+    void insuranceTabVerificationUsingParent() {
+        open("http://alfabank.ru");
+        $("#alfa").preceding(0);
+        $$(byText("Вклады")).find(visible).click();
+        $$(byText("Страхование вкладов")).find(visible).parent().click();
+        $("[data-test-id='accordion-header-2']").shouldHave(text("Страхованию подлежат"));
+    }
 }
 
